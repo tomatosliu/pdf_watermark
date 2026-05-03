@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Watermark</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>PDF Watermark</h1>
+        <p class="subtitle">Local-only. Files never leave your browser.</p>
+      </header>
+
+      <section class="dropzone" id="dropzone">
+        <input type="file" id="file-input" accept="application/pdf" hidden />
+        <label for="file-input" class="dropzone-label">
+          <span class="dropzone-icon">📄</span>
+          <span class="dropzone-text">Click or drop a PDF here</span>
+        </label>
+      </section>
+
+      <section class="preview-wrap" id="preview-wrap" hidden>
+        <div class="preview-stage" id="preview-stage">
+          <canvas id="preview-canvas"></canvas>
+          <div class="preview-overlay" id="preview-overlay"></div>
+        </div>
+        <div class="preview-meta" id="preview-meta"></div>
+      </section>
+
+      <div class="controls">
+        <label class="field">
+          <span class="field-label">Watermark text</span>
+          <input
+            type="text"
+            id="watermark-text"
+            class="text-input"
+            placeholder="e.g. CONFIDENTIAL"
+            value="CONFIDENTIAL"
+            maxlength="64"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Layout</span>
+          <select id="layout-select" class="select-input">
+            <option value="single">Single (center)</option>
+            <option value="grid2x2" selected>2 × 2 grid</option>
+            <option value="grid3x3">3 × 3 grid</option>
+          </select>
+        </label>
+
+        <div class="slider-row">
+          <label class="field">
+            <span class="field-label">
+              Opacity <span class="value-tag" id="alpha-value">0.30</span>
+            </span>
+            <input type="range" id="alpha-input" min="0.05" max="1" step="0.05" value="0.3" />
+          </label>
+
+          <label class="field">
+            <span class="field-label">
+              Angle <span class="value-tag" id="angle-value">30°</span>
+            </span>
+            <input type="range" id="angle-input" min="-90" max="90" step="1" value="30" />
+          </label>
+        </div>
+
+        <div class="slider-row">
+          <label class="field">
+            <span class="field-label">
+              Font size <span class="value-tag" id="size-value">60</span>
+            </span>
+            <input type="range" id="size-input" min="20" max="120" step="2" value="60" />
+          </label>
+
+          <label class="field color-field">
+            <span class="field-label">Color</span>
+            <input type="color" id="color-input" value="#666666" />
+          </label>
+        </div>
+      </div>
+
+      <section class="status" id="status" aria-live="polite"></section>
+
+      <button id="download-btn" class="primary-btn" disabled>Download watermarked PDF</button>
+    </main>
+
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>
